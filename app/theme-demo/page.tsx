@@ -4,11 +4,22 @@ import { useState } from "react";
 import { Button } from "@/components/Button";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger, DialogClose } from "@/components/Dialog";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/Tabs";
+import { Input } from "@/components/Input";
+import { Label } from "@/components/Label";
+import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/Select";
+import { Slider } from "@/components/Slider";
+import { Spinner } from "@/components/Spinner";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/Table";
 import Link from "next/link";
-import { MessageSquare, Plus, UserPlus, Palette, Type, Layout, Settings, Sun, Moon, ArrowLeft } from "lucide-react";
+import {
+    MessageSquare, Plus, UserPlus, Palette, Type, Layout,
+    Settings, Sun, Moon, ArrowLeft, Table as TableIcon,
+    CheckCircle2, AlertCircle, Info, Loader2, SlidersHorizontal
+} from "lucide-react";
 
 export default function ThemeDemo() {
     const [darkMode, setDarkMode] = useState(false);
+    const [sliderValue, setSliderValue] = useState([50]);
 
     const toggleDarkMode = () => {
         setDarkMode(!darkMode);
@@ -17,7 +28,7 @@ export default function ThemeDemo() {
 
     return (
         <div className={darkMode ? "dark" : ""}>
-            <div className="min-h-screen bg-background text-foreground transition-colors duration-300">
+            <div className="min-h-screen bg-background text-foreground transition-colors duration-300 pb-20">
                 {/* Header */}
                 <header className="sticky top-0 z-50 border-b border-border bg-card/95 backdrop-blur supports-[backdrop-filter]:bg-card/60">
                     <div className="container mx-auto px-4 py-4 flex items-center justify-between">
@@ -52,10 +63,10 @@ export default function ThemeDemo() {
                 <main className="container mx-auto px-4 py-12 space-y-20">
                     {/* Introduction */}
                     <section className="space-y-4 text-center max-w-3xl mx-auto">
-                        <h2 className="text-4xl font-bold tracking-tight">Design System & Components</h2>
+                        <h2 className="text-5xl font-extrabold tracking-tight">Design System & Components</h2>
                         <p className="text-lg text-muted-foreground">
                             A premium, high-performance UI kit built directly with Radix UI primitives and Tailwind CSS v4.
-                            Every component is meticulously styled to follow the official WhatsApp brand identity.
+                            Meticulously crafted for the ultimate WhatsApp CRM experience.
                         </p>
                     </section>
 
@@ -66,7 +77,7 @@ export default function ThemeDemo() {
                             <h2 className="text-2xl font-bold">Color Palette</h2>
                         </div>
 
-                        <div className="grid gap-8">
+                        <div className="grid gap-12">
                             {/* Primary Green */}
                             <div className="space-y-4">
                                 <h3 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">Primary Green (WhatsApp Logo)</h3>
@@ -94,8 +105,7 @@ export default function ThemeDemo() {
                             </div>
                         </div>
 
-                        {/* Semantic Boxes */}
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-10">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
                             <div className="p-6 rounded-2xl bg-primary text-primary-foreground shadow-wa">
                                 <h4 className="font-bold mb-1">Primary</h4>
                                 <p className="text-xs opacity-80">--color-primary</p>
@@ -115,182 +125,226 @@ export default function ThemeDemo() {
                         </div>
                     </section>
 
-                    {/* Typography */}
-                    <section className="space-y-10">
+                    {/* Core Components */}
+                    <section className="space-y-12">
                         <div className="flex items-center gap-3 border-b border-border pb-4">
-                            <Type className="w-6 h-6 text-primary" />
-                            <h2 className="text-2xl font-bold">Typography</h2>
+                            <Layout className="w-6 h-6 text-primary" />
+                            <h2 className="text-2xl font-bold">Base Components</h2>
                         </div>
 
-                        <div className="p-8 rounded-3xl bg-card border border-border space-y-8 shadow-inner-wa">
-                            <div className="space-y-2">
-                                <h1 className="text-5xl font-bold">Heading 1 - Modern Sans</h1>
-                                <p className="text-xs text-muted-foreground font-mono">text-5xl font-bold</p>
+                        <div className="grid lg:grid-cols-2 gap-12">
+                            {/* Buttons & Loading */}
+                            <div className="space-y-10">
+                                <div className="space-y-4">
+                                    <h3 className="text-lg font-semibold flex items-center gap-2">
+                                        <CheckCircle2 className="w-5 h-5 text-primary" /> Multi-variant Buttons
+                                    </h3>
+                                    <div className="flex flex-wrap gap-4">
+                                        <Button>Primary</Button>
+                                        <Button variant="secondary">Secondary</Button>
+                                        <Button variant="outline">Outline</Button>
+                                        <Button variant="destructive">Destructive</Button>
+                                        <Button variant="ghost">Ghost</Button>
+                                    </div>
+                                </div>
+
+                                <div className="space-y-4">
+                                    <h3 className="text-lg font-semibold flex items-center gap-2">
+                                        <Loader2 className="w-5 h-5 text-primary" /> Loading States (Spinners)
+                                    </h3>
+                                    <div className="flex items-end gap-8">
+                                        <div className="flex flex-col items-center gap-2">
+                                            <Spinner size="sm" />
+                                            <span className="text-[10px] text-muted-foreground uppercase font-bold">Small</span>
+                                        </div>
+                                        <div className="flex flex-col items-center gap-2">
+                                            <Spinner size="md" />
+                                            <span className="text-[10px] text-muted-foreground uppercase font-bold">Medium</span>
+                                        </div>
+                                        <div className="flex flex-col items-center gap-2">
+                                            <Spinner size="lg" />
+                                            <span className="text-[10px] text-muted-foreground uppercase font-bold">Large</span>
+                                        </div>
+                                        <Button disabled className="gap-2">
+                                            <Spinner size="sm" className="border-t-white" /> Processing
+                                        </Button>
+                                    </div>
+                                </div>
                             </div>
-                            <div className="space-y-2">
-                                <h2 className="text-4xl font-bold text-primary">Heading 2 - WhatsApp Green</h2>
-                                <p className="text-xs text-muted-foreground font-mono">text-4xl font-bold text-primary</p>
-                            </div>
-                            <div className="space-y-2 border-t border-border pt-6">
-                                <p className="text-lg leading-relaxed text-foreground">
-                                    The quick brown fox jumps over the lazy dog. WhatsApp CRM uses a primary sans-serif
-                                    stack optimized for readability and clarity.
-                                </p>
-                                <p className="text-xs text-muted-foreground font-mono">text-lg leading-relaxed</p>
+
+                            {/* Forms & Inputs */}
+                            <div className="space-y-10 p-8 rounded-3xl bg-card border border-border shadow-soft">
+                                <h3 className="text-lg font-semibold flex items-center gap-2">
+                                    <Settings className="w-5 h-5 text-primary" /> Form Architecture
+                                </h3>
+
+                                <div className="grid gap-6">
+                                    <div className="space-y-2">
+                                        <Label htmlFor="name">Full Name</Label>
+                                        <Input id="name" placeholder="Enter your full name" />
+                                    </div>
+
+                                    <div className="space-y-2">
+                                        <Label>Select Region</Label>
+                                        <Select defaultValue="na">
+                                            <SelectTrigger>
+                                                <SelectValue placeholder="Select a region" />
+                                            </SelectTrigger>
+                                            <SelectContent>
+                                                <SelectGroup>
+                                                    <SelectItem value="na">North America</SelectItem>
+                                                    <SelectItem value="eu">Europe</SelectItem>
+                                                    <SelectItem value="asia">Asia Pacific</SelectItem>
+                                                    <SelectItem value="sa">South America</SelectItem>
+                                                </SelectGroup>
+                                            </SelectContent>
+                                        </Select>
+                                    </div>
+
+                                    <div className="space-y-4 pt-2">
+                                        <div className="flex items-center justify-between">
+                                            <Label>Volume Sensitivity</Label>
+                                            <span className="text-xs font-mono font-bold text-primary">{sliderValue}%</span>
+                                        </div>
+                                        <Slider
+                                            defaultValue={[50]}
+                                            max={100}
+                                            step={1}
+                                            onValueChange={setSliderValue}
+                                        />
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </section>
 
-                    {/* Interactive Components */}
+                    {/* Tables & Complex Data */}
                     <section className="space-y-10">
                         <div className="flex items-center gap-3 border-b border-border pb-4">
-                            <Layout className="w-6 h-6 text-primary" />
-                            <h2 className="text-2xl font-bold">Radix UI Components</h2>
+                            <TableIcon className="w-6 h-6 text-primary" />
+                            <h2 className="text-2xl font-bold">Data visualization (Table)</h2>
                         </div>
 
-                        <div className="grid lg:grid-cols-2 gap-12">
-                            {/* Buttons Column */}
-                            <div className="space-y-8">
-                                <h3 className="text-lg font-semibold">Custom Buttons</h3>
-                                <div className="flex flex-wrap gap-4">
-                                    <Button>Primary Action</Button>
-                                    <Button variant="secondary">Teal Support</Button>
-                                    <Button variant="outline">Outline</Button>
-                                    <Button variant="destructive">Critical Error</Button>
-                                    <Button variant="ghost">Soft Hover</Button>
-                                </div>
-                                <div className="flex flex-wrap gap-4">
-                                    <Button size="sm">Small</Button>
-                                    <Button size="md">Medium</Button>
-                                    <Button size="lg">Large Premium</Button>
-                                    <Button size="icon" className="rounded-full"><Plus /></Button>
-                                </div>
-                            </div>
+                        <div className="space-y-6">
+                            <Table>
+                                <TableHeader>
+                                    <TableRow>
+                                        <TableHead className="w-[100px]">ID</TableHead>
+                                        <TableHead>Customer</TableHead>
+                                        <TableHead>Session Status</TableHead>
+                                        <TableHead>Last Message</TableHead>
+                                        <TableHead className="text-right">Action</TableHead>
+                                    </TableRow>
+                                </TableHeader>
+                                <TableBody>
+                                    {[
+                                        { id: "WA-01", name: "Robin Smith", status: "Active", last: "Hey, are you there?", color: "success" },
+                                        { id: "WA-02", name: "Sarah Connor", status: "Pending", last: "Will arrive in 5 mins", color: "warning" },
+                                        { id: "WA-03", name: "John Wick", status: "Archived", last: "Order confirmed.", color: "muted-foreground" },
+                                        { id: "WA-04", name: "Diana Prince", status: "Active", last: "Sent a photo", color: "success" },
+                                    ].map((row) => (
+                                        <TableRow key={row.id}>
+                                            <TableCell className="font-mono font-medium">{row.id}</TableCell>
+                                            <TableCell>
+                                                <div className="flex items-center gap-3">
+                                                    <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary text-xs font-bold">
+                                                        {row.name.split(' ').map(n => n[0]).join('')}
+                                                    </div>
+                                                    <span className="font-semibold">{row.name}</span>
+                                                </div>
+                                            </TableCell>
+                                            <TableCell>
+                                                <div className="flex items-center gap-2">
+                                                    <div className={`w-2 h-2 rounded-full bg-${row.color === 'success' ? 'primary' : row.color === 'warning' ? 'warning' : 'muted'}`} />
+                                                    <span className="text-xs font-medium">{row.status}</span>
+                                                </div>
+                                            </TableCell>
+                                            <TableCell className="text-muted-foreground">{row.last}</TableCell>
+                                            <TableCell className="text-right">
+                                                <Button variant="ghost" size="sm">View</Button>
+                                            </TableCell>
+                                        </TableRow>
+                                    ))}
+                                </TableBody>
+                            </Table>
+                        </div>
+                    </section>
 
-                            {/* Dialog Column */}
-                            <div className="space-y-8">
-                                <h3 className="text-lg font-semibold">Premium Modals</h3>
-                                <div className="p-10 rounded-3xl bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center border border-dashed border-border">
-                                    <Dialog>
-                                        <DialogTrigger asChild>
-                                            <Button size="lg" className="shadow-wa animate-pulse hover:animate-none">
-                                                <UserPlus className="w-5 h-5 mr-2" /> Launch Dialog Demo
-                                            </Button>
-                                        </DialogTrigger>
-                                        <DialogContent>
-                                            <DialogHeader>
-                                                <DialogTitle>Add New Contact</DialogTitle>
-                                                <DialogDescription>
-                                                    Create a new lead in your CRM. This will sync with your WhatsApp device automatically.
-                                                </DialogDescription>
-                                            </DialogHeader>
-                                            <div className="grid gap-4 py-6">
-                                                <div className="space-y-2">
-                                                    <label className="text-sm font-medium">Customer Name</label>
-                                                    <input className="flex h-12 w-full rounded-xl border border-input bg-background px-4 py-2 text-sm focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none" placeholder="John Doe" />
-                                                </div>
-                                                <div className="space-y-2">
-                                                    <label className="text-sm font-medium">WhatsApp Number</label>
-                                                    <input className="flex h-12 w-full rounded-xl border border-input bg-background px-4 py-2 text-sm focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none" placeholder="+1 (555) 000-0000" />
-                                                </div>
-                                            </div>
-                                            <DialogFooter>
-                                                <DialogClose asChild>
-                                                    <Button variant="ghost">Cancel</Button>
-                                                </DialogClose>
-                                                <Button className="px-8 shadow-wa">Save Customer</Button>
-                                            </DialogFooter>
-                                        </DialogContent>
-                                    </Dialog>
-                                </div>
-                            </div>
+                    {/* Interactive Modals (Dialog) */}
+                    <section className="space-y-10">
+                        <div className="flex items-center gap-3 border-b border-border pb-4">
+                            <SlidersHorizontal className="w-6 h-6 text-primary" />
+                            <h2 className="text-2xl font-bold">Advanced Overlays</h2>
                         </div>
 
-                        {/* Tabs Example - Dashboard Style */}
-                        <div className="space-y-8 pt-10">
-                            <h3 className="text-lg font-semibold">Unified Navigation (Radix Tabs)</h3>
-                            <Tabs defaultValue="overview" className="w-full">
-                                <TabsList className="mb-6 p-1.5 bg-muted/50 rounded-2xl border border-border">
-                                    <TabsTrigger value="overview" className="px-8 py-2.5 rounded-xl">Overview</TabsTrigger>
-                                    <TabsTrigger value="contacts" className="px-8 py-2.5 rounded-xl">Contacts</TabsTrigger>
-                                    <TabsTrigger value="settings" className="px-8 py-2.5 rounded-xl">Settings</TabsTrigger>
-                                </TabsList>
-
-                                <TabsContent value="overview" className="animate-in fade-in duration-500">
-                                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                                        {[
-                                            { label: "Active Chats", value: "1,284", delta: "+12.5%", color: "primary" },
-                                            { label: "Success Rate", value: "98.2%", delta: "+2.1%", color: "teal" },
-                                            { label: "Response Time", value: "2.4m", delta: "-14%", color: "blue" },
-                                        ].map((stat, i) => (
-                                            <div key={i} className="p-6 rounded-3xl bg-card border border-border shadow-soft">
-                                                <p className="text-sm text-muted-foreground font-medium">{stat.label}</p>
-                                                <div className="flex items-end justify-between mt-2">
-                                                    <h4 className="text-3xl font-bold">{stat.value}</h4>
-                                                    <span className={`text-xs font-bold px-2 py-1 rounded-lg bg-${stat.color}-50 text-${stat.color}-600`}>
-                                                        {stat.delta}
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        ))}
-                                    </div>
-                                </TabsContent>
-
-                                <TabsContent value="contacts" className="animate-in fade-in slide-in-from-top-2 duration-500">
-                                    <div className="p-12 text-center rounded-3xl bg-card border border-border border-dashed">
-                                        <UserPlus className="w-12 h-12 text-muted-foreground mx-auto mb-4 opacity-20" />
-                                        <h4 className="text-xl font-bold mb-2">Manage Your Database</h4>
-                                        <p className="text-muted-foreground mb-6 max-w-sm mx-auto">
-                                            All your WhatsApp contacts are automatically imported and synced with the CRM dashboard.
-                                        </p>
-                                        <Button variant="secondary">View Full Contact List</Button>
-                                    </div>
-                                </TabsContent>
-
-                                <TabsContent value="settings" className="animate-in fade-in zoom-in-95 duration-500">
-                                    <div className="p-8 rounded-3xl bg-card border border-border shadow-soft space-y-6">
-                                        <div className="flex items-center justify-between">
-                                            <div>
-                                                <h4 className="font-bold">Dark Mode Sync</h4>
-                                                <p className="text-sm text-muted-foreground">Automatically track system appearance preferences.</p>
-                                            </div>
-                                            <Button variant="outline" size="sm" onClick={toggleDarkMode}>Toggle System</Button>
+                        <div className="p-12 rounded-3xl bg-muted/30 border border-dashed border-border flex flex-col items-center gap-6">
+                            <p className="text-center text-muted-foreground max-w-md">
+                                Radix Dialogs are built with premium "enter" animations and backdrop blurs for a high-end application feeling.
+                            </p>
+                            <Dialog>
+                                <DialogTrigger asChild>
+                                    <Button size="lg" className="shadow-wa gap-2">
+                                        <Plus className="w-5 h-5" /> Create New CRM Instance
+                                    </Button>
+                                </DialogTrigger>
+                                <DialogContent>
+                                    <DialogHeader>
+                                        <DialogTitle>Configure Instance</DialogTitle>
+                                        <DialogDescription>
+                                            Setup your new WhatsApp CRM instance. This will prepare the database and API endpoints.
+                                        </DialogDescription>
+                                    </DialogHeader>
+                                    <div className="grid gap-6 py-4">
+                                        <div className="space-y-2">
+                                            <Label>Instance Name</Label>
+                                            <Input placeholder="e.g. Sales Team Alpha" />
                                         </div>
-                                        <div className="flex items-center justify-between border-t border-border pt-6">
-                                            <div>
-                                                <h4 className="font-bold">Notifications</h4>
-                                                <p className="text-sm text-muted-foreground">Get real-time alerts for incoming WhatsApp messages.</p>
-                                            </div>
-                                            <div className="w-12 h-6 rounded-full bg-primary relative px-1 flex items-center">
-                                                <div className="w-4 h-4 rounded-full bg-white ml-auto shadow-sm" />
-                                            </div>
+                                        <div className="space-y-2">
+                                            <Label>Default Response Language</Label>
+                                            <Select defaultValue="en">
+                                                <SelectTrigger>
+                                                    <SelectValue />
+                                                </SelectTrigger>
+                                                <SelectContent>
+                                                    <SelectItem value="en">English (US)</SelectItem>
+                                                    <SelectItem value="es">Spanish</SelectItem>
+                                                    <SelectItem value="fr">French</SelectItem>
+                                                </SelectContent>
+                                            </Select>
                                         </div>
                                     </div>
-                                </TabsContent>
-                            </Tabs>
+                                    <DialogFooter>
+                                        <DialogClose asChild>
+                                            <Button variant="outline">Dismiss</Button>
+                                        </DialogClose>
+                                        <Button className="px-8 shadow-wa">Initialize</Button>
+                                    </DialogFooter>
+                                </DialogContent>
+                            </Dialog>
                         </div>
                     </section>
                 </main>
 
                 {/* Footer */}
                 <footer className="border-t border-border bg-card mt-24">
-                    <div className="container mx-auto px-4 py-8 flex flex-col md:flex-row items-center justify-between gap-6">
-                        <div className="flex items-center gap-2">
-                            <MessageSquare className="w-5 h-5 text-primary" />
-                            <p className="text-sm font-semibold">WhatsApp CRM Dashboard</p>
+                    <div className="container mx-auto px-4 py-12 flex flex-col md:flex-row items-center justify-between gap-8">
+                        <div className="flex items-center gap-3">
+                            <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-white">
+                                <MessageSquare className="w-5 h-5" />
+                            </div>
+                            <p className="font-bold">WhatsApp CRM <span className="text-primary">v4.0</span></p>
+                        </div>
+                        <div className="flex gap-8 text-sm font-medium text-muted-foreground">
+                            <Link href="#" className="hover:text-primary transition-colors">Documentation</Link>
+                            <Link href="#" className="hover:text-primary transition-colors">Components</Link>
+                            <Link href="#" className="hover:text-primary transition-colors">Github</Link>
                         </div>
                         <p className="text-xs text-muted-foreground">
-                            Built with Next.js, Radix UI, & Tailwind CSS v4 • Premium Design System
+                            © 2026 Developed for Advanced CRM Experience.
                         </p>
-                        <div className="flex gap-4">
-                            <Button variant="ghost" size="sm">Docs</Button>
-                            <Button variant="ghost" size="sm">Support</Button>
-                        </div>
                     </div>
                 </footer>
             </div>
         </div>
     );
 }
-
-// End of file
