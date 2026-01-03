@@ -19,13 +19,7 @@ export default function Home() {
                 href="/theme-demo"
                 className="px-8 py-4 rounded-lg bg-white text-primary-600 hover:bg-neutral-100 transition-all duration-200 font-semibold shadow-lg hover:shadow-xl"
               >
-                🎨 View Theme Demo
-              </Link>
-              <Link
-                href="/radix-demo"
-                className="px-8 py-4 rounded-lg bg-white text-primary-600 hover:bg-neutral-100 transition-all duration-200 font-semibold shadow-lg hover:shadow-xl"
-              >
-                🧩 Radix Components
+                🎨 View Design System
               </Link>
               <a
                 href="/THEMING.md"
