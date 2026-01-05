@@ -364,6 +364,7 @@ export default function ThemeDemo() {
                             <p className="font-bold">WhatsApp CRM <span className="text-primary">v4.0</span></p>
                         </div>
                         <div className="flex gap-8 text-sm font-medium text-muted-foreground">
+                            <Link href="/sidebar-demo" className="hover:text-primary transition-colors">Sidebar</Link>
                             <Link href="/datepicker-demo" className="hover:text-primary transition-colors">Date Picker</Link>
                             <Link href="#" className="hover:text-primary transition-colors">Documentation</Link>
                             <Link href="#" className="hover:text-primary transition-colors">Components</Link>
