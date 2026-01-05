@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/Button";
-import { DatePicker } from "@/components/DatePicker";
+import { DatePicker, DateRangePicker } from "@/components/DatePicker";
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/Dialog";
 import { Input } from "@/components/Input";
 import { Label } from "@/components/Label";
@@ -30,6 +30,7 @@ export default function ThemeDemo() {
     const [darkMode, setDarkMode] = useState(false);
     const [sliderValue, setSliderValue] = useState([50]);
     const [selectedDate, setSelectedDate] = useState<Date | undefined>();
+    const [dateRange, setDateRange] = useState<{ from: Date | undefined; to?: Date | undefined } | undefined>();
 
     const toggleDarkMode = () => {
         setDarkMode(!darkMode);
@@ -211,12 +212,21 @@ export default function ThemeDemo() {
                                         </Select>
                                     </div>
 
-                                    <div className="space-y-2">
+                                    <div className="space-y-4">
                                         <Label>Select a Date</Label>
                                         <DatePicker
                                             date={selectedDate}
                                             onSelect={setSelectedDate}
                                             placeholder="Pick a date"
+                                        />
+                                    </div>
+
+                                    <div className="space-y-2">
+                                        <Label>Select Date Range</Label>
+                                        <DateRangePicker
+                                            dateRange={dateRange}
+                                            onSelect={setDateRange}
+                                            placeholder="Pick a date range"
                                         />
                                     </div>
 
