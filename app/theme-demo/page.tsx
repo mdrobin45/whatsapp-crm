@@ -1,25 +1,35 @@
 "use client";
 
-import { useState } from "react";
 import { Button } from "@/components/Button";
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger, DialogClose } from "@/components/Dialog";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/Tabs";
+import { DatePicker } from "@/components/DatePicker";
+import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/Dialog";
 import { Input } from "@/components/Input";
 import { Label } from "@/components/Label";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/Select";
 import { Slider } from "@/components/Slider";
 import { Spinner } from "@/components/Spinner";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/Table";
-import Link from "next/link";
 import {
-    MessageSquare, Plus, UserPlus, Palette, Type, Layout,
-    Settings, Sun, Moon, ArrowLeft, Table as TableIcon,
-    CheckCircle2, AlertCircle, Info, Loader2, SlidersHorizontal
+   ArrowLeft,
+   CheckCircle2,
+   Layout,
+   Loader2,
+   MessageSquare,
+   Moon,
+   Palette,
+   Plus,
+   Settings,
+   SlidersHorizontal,
+   Sun,
+   Table as TableIcon
 } from "lucide-react";
+import Link from "next/link";
+import { useState } from "react";
 
 export default function ThemeDemo() {
     const [darkMode, setDarkMode] = useState(false);
     const [sliderValue, setSliderValue] = useState([50]);
+    const [selectedDate, setSelectedDate] = useState<Date | undefined>();
 
     const toggleDarkMode = () => {
         setDarkMode(!darkMode);
@@ -201,6 +211,15 @@ export default function ThemeDemo() {
                                         </Select>
                                     </div>
 
+                                    <div className="space-y-2">
+                                        <Label>Select a Date</Label>
+                                        <DatePicker
+                                            date={selectedDate}
+                                            onSelect={setSelectedDate}
+                                            placeholder="Pick a date"
+                                        />
+                                    </div>
+
                                     <div className="space-y-4 pt-2">
                                         <div className="flex items-center justify-between">
                                             <Label>Volume Sensitivity</Label>
@@ -335,6 +354,7 @@ export default function ThemeDemo() {
                             <p className="font-bold">WhatsApp CRM <span className="text-primary">v4.0</span></p>
                         </div>
                         <div className="flex gap-8 text-sm font-medium text-muted-foreground">
+                            <Link href="/datepicker-demo" className="hover:text-primary transition-colors">Date Picker</Link>
                             <Link href="#" className="hover:text-primary transition-colors">Documentation</Link>
                             <Link href="#" className="hover:text-primary transition-colors">Components</Link>
                             <Link href="#" className="hover:text-primary transition-colors">Github</Link>

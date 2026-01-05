@@ -310,3 +310,15 @@ body {
 @utility slide-out-to-top-2 {
   --tw-exit-translate-y: -0.5rem;
 }
+
+@utility slide-in-from-bottom-2 {
+  --tw-enter-translate-y: 0.5rem;
+}
+
+@utility slide-in-from-left-2 {
+  --tw-enter-translate-x: -0.5rem;
+}
+
+@utility slide-in-from-right-2 {
+  --tw-enter-translate-x: 0.5rem;
+}
