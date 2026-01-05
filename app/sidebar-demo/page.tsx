@@ -1,20 +1,21 @@
 "use client";
 
 import { Button } from "@/components/Button";
+import { NotificationPopover } from "@/components/NotificationPopover";
 import { Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarHeader, SidebarItem, SidebarSubItem, SidebarSubMenu, SidebarToggle } from "@/components/Sidebar";
 import {
-    ArrowLeft,
-    BarChart3,
-    Bell,
-    FileText,
-    Folder,
-    LayoutDashboard,
-    MessageSquare,
-    Plus,
-    Search,
-    Settings,
-    User,
-    Users
+   ArrowLeft,
+   BarChart3,
+   Bell,
+   FileText,
+   Folder,
+   LayoutDashboard,
+   LogOut,
+   MessageSquare,
+   Plus,
+   Settings,
+   User,
+   Users
 } from "lucide-react";
 import Link from "next/link";
 
@@ -26,12 +27,14 @@ export default function SidebarDemo() {
         <SidebarToggle />
         
         <SidebarHeader>
-          <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-white">
-            <MessageSquare className="w-5 h-5" />
-          </div>
-          <div>
-            <h2 className="font-bold text-sm">WhatsApp CRM</h2>
-            <p className="text-xs text-muted-foreground">Dashboard</p>
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-white flex-shrink-0">
+              <MessageSquare className="w-5 h-5" />
+            </div>
+            <div className="flex flex-col">
+              <h2 className="font-bold text-sm leading-none">WhatsApp CRM</h2>
+              <p className="text-[10px] text-muted-foreground mt-1">Dashboard</p>
+            </div>
           </div>
         </SidebarHeader>
 
@@ -121,6 +124,19 @@ export default function SidebarDemo() {
             }
             label="John Doe"
             href="#"
+            trailing={
+              <Button 
+                variant="ghost" 
+                size="icon" 
+                className="h-8 w-8 text-muted-foreground hover:text-destructive hover:bg-destructive/10"
+                onClick={(e) => {
+                  e.preventDefault();
+                  console.log("Logout clicked");
+                }}
+              >
+                <LogOut className="h-4 w-4" />
+              </Button>
+            }
           />
         </SidebarFooter>
       </Sidebar>
@@ -139,12 +155,7 @@ export default function SidebarDemo() {
               <h1 className="text-2xl font-bold">Dashboard Sidebar Demo</h1>
             </div>
             <div className="flex items-center gap-3">
-              <Button variant="outline" size="sm">
-                <Search className="w-4 h-4" />
-              </Button>
-              <Button variant="outline" size="sm">
-                <Bell className="w-4 h-4" />
-              </Button>
+              <NotificationPopover />
               <Button size="sm">
                 <Plus className="w-4 h-4 mr-2" /> New
               </Button>

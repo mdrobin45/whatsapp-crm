@@ -38,7 +38,7 @@ export function Sidebar({ className, children }: SidebarProps) {
     <SidebarContext.Provider value={{ isCollapsed, toggleCollapsed }}>
       <aside
         className={cn(
-          "relative flex flex-col h-screen bg-card border-r border-border transition-all duration-300 ease-in-out",
+          "relative flex flex-col h-screen bg-card border-r border-border transition-all duration-300 ease-in-out overflow-x-hidden",
           isCollapsed ? "w-16" : "w-64",
           className
         )}
@@ -53,9 +53,9 @@ export function SidebarHeader({ className, children }: { className?: string; chi
   const { isCollapsed } = useSidebar();
   
   return (
-    <div className={cn("flex items-center justify-between p-4 border-b border-border", className)}>
+    <div className={cn("flex items-center p-4 border-b border-border h-16 min-h-[64px]", className)}>
       {!isCollapsed && (
-        <div className="flex items-center gap-3">
+        <div className="flex items-center justify-between w-full gap-3">
           {children}
         </div>
       )}
@@ -70,7 +70,7 @@ export function SidebarHeader({ className, children }: { className?: string; chi
 
 export function SidebarContent({ className, children }: { className?: string; children?: React.ReactNode }) {
   return (
-    <div className={cn("flex-1 overflow-y-auto py-4", className)}>
+    <div className={cn("flex-1 overflow-y-auto overflow-x-hidden py-4", className)}>
       {children}
     </div>
   );
@@ -90,6 +90,7 @@ export interface SidebarItemProps {
   href?: string;
   active?: boolean;
   badge?: string | number;
+  trailing?: React.ReactNode;
   onClick?: () => void;
   className?: string;
 }
@@ -100,6 +101,7 @@ export function SidebarItem({
   href, 
   active = false, 
   badge,
+  trailing,
   onClick,
   className 
 }: SidebarItemProps) {
@@ -114,11 +116,23 @@ export function SidebarItem({
       )}
       {!isCollapsed && (
         <>
-          <span className="flex-1 truncate">{label}</span>
+          <span className="flex-1 truncate text-left">{label}</span>
           {badge && (
             <span className="flex items-center justify-center min-w-[20px] h-5 px-1.5 text-[10px] font-bold rounded-full bg-primary text-primary-foreground">
               {badge}
             </span>
+          )}
+          {trailing && (
+            <div 
+              className="ml-auto flex items-center justify-center"
+              onClick={(e) => {
+                // If the parent is a button/link, we might want to stop propagation
+                // if the trailing part has its own click handler
+                e.stopPropagation();
+              }}
+            >
+              {trailing}
+            </div>
           )}
         </>
       )}
