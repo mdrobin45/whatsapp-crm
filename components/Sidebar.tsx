@@ -2,8 +2,8 @@
 
 import { cn } from "@/lib/utils";
 import {
-    ChevronLeft,
-    ChevronRight
+   ChevronLeft,
+   ChevronRight
 } from "lucide-react";
 import Link from "next/link";
 import * as React from "react";
@@ -191,3 +191,100 @@ export function SidebarGroup({ className, title, children }: { className?: strin
     </div>
   );
 }
+
+export interface SidebarSubMenuProps {
+  icon?: React.ReactNode;
+  label: string;
+  children?: React.ReactNode;
+  defaultOpen?: boolean;
+  className?: string;
+}
+
+export function SidebarSubMenu({ 
+  icon, 
+  label, 
+  children, 
+  defaultOpen = false,
+  className 
+}: SidebarSubMenuProps) {
+  const { isCollapsed } = useSidebar();
+  const [isOpen, setIsOpen] = React.useState(defaultOpen);
+
+  const toggleOpen = () => setIsOpen(!isOpen);
+
+  if (isCollapsed) {
+    // When collapsed, show as regular item
+    return (
+      <div className={cn("relative flex items-center gap-3 px-3 py-2.5 mx-2 rounded-lg text-sm font-medium transition-all cursor-pointer hover:bg-muted", className)}>
+        <span className="flex-shrink-0 mx-auto">
+          {icon}
+        </span>
+      </div>
+    );
+  }
+
+  return (
+    <div className={className}>
+      <button
+        onClick={toggleOpen}
+        className={cn(
+          "relative flex items-center gap-3 px-3 py-2.5 mx-2 rounded-lg text-sm font-medium transition-all cursor-pointer w-full hover:bg-muted",
+          isOpen && "bg-muted/50"
+        )}
+      >
+        {icon && <span className="flex-shrink-0">{icon}</span>}
+        <span className="flex-1 truncate text-left">{label}</span>
+        <ChevronRight className={cn("h-4 w-4 transition-transform", isOpen && "rotate-90")} />
+      </button>
+      
+      {isOpen && (
+        <div className="relative mt-1">
+          {children}
+        </div>
+      )}
+    </div>
+  );
+}
+
+export interface SidebarSubItemProps {
+  label: string;
+  href?: string;
+  active?: boolean;
+  onClick?: () => void;
+  className?: string;
+}
+
+export function SidebarSubItem({ 
+  label, 
+  href, 
+  active = false,
+  onClick,
+  className 
+}: SidebarSubItemProps) {
+  const content = (
+    <span className="flex-1 truncate">{label}</span>
+  );
+
+  const baseClasses = cn(
+    "relative flex items-center gap-3 pl-11 pr-3 py-2 ml-2 mr-2 rounded-lg text-sm font-medium transition-all cursor-pointer",
+    "before:absolute before:left-5 before:top-1/2 before:-translate-y-1/2 before:w-3 before:h-px before:bg-border",
+    "hover:bg-muted",
+    active ? "bg-primary/10 text-primary font-semibold" : "text-muted-foreground",
+    className
+  );
+
+  if (href) {
+    return (
+      <Link href={href} className={baseClasses}>
+        {content}
+      </Link>
+    );
+  }
+
+  return (
+    <button onClick={onClick} className={baseClasses}>
+      {content}
+    </button>
+  );
+}
+

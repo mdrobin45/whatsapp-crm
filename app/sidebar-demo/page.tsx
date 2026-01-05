@@ -1,12 +1,13 @@
 "use client";
 
 import { Button } from "@/components/Button";
-import { Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarHeader, SidebarItem, SidebarToggle } from "@/components/Sidebar";
+import { Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarHeader, SidebarItem, SidebarSubItem, SidebarSubMenu, SidebarToggle } from "@/components/Sidebar";
 import {
     ArrowLeft,
     BarChart3,
     Bell,
     FileText,
+    Folder,
     LayoutDashboard,
     MessageSquare,
     Plus,
@@ -63,6 +64,25 @@ export default function SidebarDemo() {
               label="Reports"
               href="#"
             />
+            <SidebarSubMenu
+              icon={<Folder className="w-5 h-5" />}
+              label="Projects"
+              defaultOpen
+            >
+              <SidebarSubItem
+                label="Active Projects"
+                href="#"
+                active
+              />
+              <SidebarSubItem
+                label="Archived"
+                href="#"
+              />
+              <SidebarSubItem
+                label="Templates"
+                href="#"
+              />
+            </SidebarSubMenu>
           </SidebarGroup>
 
           <SidebarGroup title="Settings">
@@ -72,11 +92,23 @@ export default function SidebarDemo() {
               href="#"
               badge={3}
             />
-            <SidebarItem
+            <SidebarSubMenu
               icon={<Settings className="w-5 h-5" />}
               label="Preferences"
-              href="#"
-            />
+            >
+              <SidebarSubItem
+                label="General"
+                href="#"
+              />
+              <SidebarSubItem
+                label="Appearance"
+                href="#"
+              />
+              <SidebarSubItem
+                label="Privacy"
+                href="#"
+              />
+            </SidebarSubMenu>
           </SidebarGroup>
         </SidebarContent>
 
