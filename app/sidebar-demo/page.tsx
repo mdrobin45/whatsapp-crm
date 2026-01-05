@@ -99,7 +99,7 @@ export default function SidebarDemo() {
         <header className="border-b border-border bg-card px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
-              <Link href="/theme-demo">
+              <Link href="/component-library">
                 <Button variant="ghost" size="sm">
                   <ArrowLeft className="w-4 h-4 mr-2" /> Back to Theme Demo
                 </Button>

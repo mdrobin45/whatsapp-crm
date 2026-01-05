@@ -1,8 +1,9 @@
 "use client";
 
-import * as React from "react";
+import { cn } from "@/lib/utils";
 import * as SelectPrimitive from "@radix-ui/react-select";
 import { Check, ChevronDown, ChevronUp } from "lucide-react";
+import * as React from "react";
 
 const Select = SelectPrimitive.Root;
 const SelectGroup = SelectPrimitive.Group;
@@ -14,7 +15,10 @@ const SelectTrigger = React.forwardRef<
 >(({ className, children, ...props }, ref) => (
     <SelectPrimitive.Trigger
         ref={ref}
-        className={`flex h-11 w-full items-center justify-between rounded-xl border border-input bg-background px-4 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 transition-all ${className || ''}`}
+        className={cn(
+            "flex h-11 w-full items-center justify-between rounded-xl border border-input bg-background px-4 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 transition-all cursor-pointer",
+            className
+        )}
         {...props}
     >
         {children}
@@ -58,7 +62,7 @@ const SelectItem = React.forwardRef<
 >(({ className, children, ...props }, ref) => (
     <SelectPrimitive.Item
         ref={ref}
-        className={`relative flex w-full cursor-default select-none items-center rounded-lg py-2.5 pl-8 pr-4 text-sm outline-none focus:bg-muted focus:text-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 transition-colors ${className || ''}`}
+        className={`relative flex w-full cursor-pointer select-none items-center rounded-lg py-2.5 pl-8 pr-4 text-sm outline-none focus:bg-muted focus:text-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 transition-colors ${className || ''}`}
         {...props}
     >
         <span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
@@ -72,10 +76,6 @@ const SelectItem = React.forwardRef<
 SelectItem.displayName = SelectPrimitive.Item.displayName;
 
 export {
-    Select,
-    SelectGroup,
-    SelectValue,
-    SelectTrigger,
-    SelectContent,
-    SelectItem,
+   Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue
 };
+

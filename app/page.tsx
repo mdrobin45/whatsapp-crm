@@ -16,7 +16,7 @@ export default function Home() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-6">
               <Link
-                href="/theme-demo"
+                href="/component-library"
                 className="px-8 py-4 rounded-lg bg-white text-primary-600 hover:bg-neutral-100 transition-all duration-200 font-semibold shadow-lg hover:shadow-xl"
               >
                 🎨 View Design System
@@ -147,7 +147,7 @@ export default function Home() {
             Check out the interactive theme demo to see all components, colors, and patterns in action.
           </p>
           <Link
-            href="/theme-demo"
+            href="/component-library"
             className="inline-block px-8 py-4 rounded-lg wa-gradient-primary text-white hover:shadow-xl transition-all duration-200 font-semibold shadow-lg"
           >
             Launch Theme Demo →
@@ -164,7 +164,7 @@ export default function Home() {
               <p className="text-sm text-muted-foreground">Built with Next.js & Tailwind CSS v4</p>
             </div>
             <div className="flex gap-6 text-sm">
-              <Link href="/theme-demo" className="text-muted-foreground hover:text-foreground transition-colors">
+              <Link href="/component-library" className="text-muted-foreground hover:text-foreground transition-colors">
                 Theme Demo
               </Link>
               <a href="/THEMING.md" className="text-muted-foreground hover:text-foreground transition-colors">

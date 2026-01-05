@@ -28,7 +28,7 @@ export default function DatePickerDemo() {
                         </div>
                     </div>
 
-                    <Link href="/theme-demo">
+                    <Link href="/component-library">
                         <Button variant="ghost" size="sm">
                             <ArrowLeft className="w-4 h-4 mr-2" /> Back to Theme Demo
                         </Button>

@@ -336,7 +336,7 @@ Add hover effects to interactive elements:
 
 ## Theme Demo
 
-Visit `/theme-demo` to see all theme elements in action, including:
+Visit `/component-library` to see all theme elements in action, including:
 - Complete color palettes with all variants
 - Typography examples
 - Button styles
@@ -359,7 +359,7 @@ To customize the theme, edit `app/globals.css`:
 
 For questions or issues with the theming system, refer to:
 - [Tailwind CSS v4 Documentation](https://tailwindcss.com/docs)
-- Theme demo page at `/theme-demo`
+- Theme demo page at `/component-library`
 - This documentation
 
 ---

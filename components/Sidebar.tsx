@@ -129,7 +129,7 @@ export function SidebarItem({
   );
 
   const baseClasses = cn(
-    "relative flex items-center gap-3 px-3 py-2.5 mx-2 rounded-lg text-sm font-medium transition-all",
+    "relative flex items-center gap-3 px-3 py-2.5 mx-2 rounded-lg text-sm font-medium transition-all cursor-pointer",
     "hover:bg-muted",
     active ? "bg-primary text-primary-foreground hover:bg-primary/90" : "text-foreground",
     isCollapsed && "justify-center px-2",
