@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/Button";
 import { NotificationPopover } from "@/components/NotificationPopover";
-import { Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarHeader, SidebarItem, SidebarSubItem, SidebarSubMenu, SidebarToggle } from "@/components/Sidebar";
+import { Sidebar, SidebarBranding, SidebarContent, SidebarFooter, SidebarGroup, SidebarHeader, SidebarItem, SidebarSubItem, SidebarSubMenu, SidebarToggle } from "@/components/Sidebar";
 import {
    ArrowLeft,
    BarChart3,
@@ -27,15 +27,15 @@ export default function SidebarDemo() {
         <SidebarToggle />
         
         <SidebarHeader>
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-white flex-shrink-0">
-              <MessageSquare className="w-5 h-5" />
-            </div>
-            <div className="flex flex-col">
-              <h2 className="font-bold text-sm leading-none">WhatsApp CRM</h2>
-              <p className="text-[10px] text-muted-foreground mt-1">Dashboard</p>
-            </div>
-          </div>
+          <SidebarBranding 
+            icon={
+              <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-white flex-shrink-0">
+                <MessageSquare className="w-5 h-5" />
+              </div>
+            }
+            title="WhatsApp CRM"
+            description="Dashboard"
+          />
         </SidebarHeader>
 
         <SidebarContent>

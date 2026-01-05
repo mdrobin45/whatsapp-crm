@@ -38,7 +38,7 @@ export function Sidebar({ className, children }: SidebarProps) {
     <SidebarContext.Provider value={{ isCollapsed, toggleCollapsed }}>
       <aside
         className={cn(
-          "relative flex flex-col h-screen bg-card border-r border-border transition-all duration-300 ease-in-out overflow-x-hidden",
+          "relative flex flex-col h-screen bg-card border-r border-border transition-all duration-300 ease-in-out",
           isCollapsed ? "w-16" : "w-64",
           className
         )}
@@ -53,15 +53,41 @@ export function SidebarHeader({ className, children }: { className?: string; chi
   const { isCollapsed } = useSidebar();
   
   return (
-    <div className={cn("flex items-center p-4 border-b border-border h-16 min-h-[64px]", className)}>
+    <div className={cn("flex items-center p-4 border-b border-border h-16 min-h-[64px] overflow-hidden bg-card", className)}>
+      <div className="flex items-center justify-between w-full h-full gap-3 transition-opacity duration-300">
+        {!isCollapsed ? (
+          children
+        ) : (
+          <div className="flex items-center justify-center w-full h-full animate-in fade-in duration-300">
+            {React.Children.toArray(children)[0]}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+export interface SidebarBrandingProps {
+  icon: React.ReactNode;
+  title: string;
+  description?: string;
+  className?: string;
+}
+
+export function SidebarBranding({ icon, title, description, className }: SidebarBrandingProps) {
+  const { isCollapsed } = useSidebar();
+
+  return (
+    <div className={cn("flex items-center gap-3 overflow-hidden transition-all duration-300", isCollapsed ? "justify-center w-full" : "justify-start flex-1", className)}>
+      <div className="flex-shrink-0 flex items-center justify-center">
+        {icon}
+      </div>
       {!isCollapsed && (
-        <div className="flex items-center justify-between w-full gap-3">
-          {children}
-        </div>
-      )}
-      {isCollapsed && (
-        <div className="flex items-center justify-center w-full">
-          {React.Children.toArray(children)[0]}
+        <div className="flex flex-col min-w-0 animate-in fade-in slide-in-from-left-2 duration-300">
+          <h2 className="font-bold text-sm leading-none truncate">{title}</h2>
+          {description && (
+            <p className="text-[10px] text-muted-foreground mt-1 truncate">{description}</p>
+          )}
         </div>
       )}
     </div>
